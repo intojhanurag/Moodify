@@ -1,0 +1,455 @@
+/* General Styles */
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: 'Lato', sans-serif;
+    background-color: #1A1A2E;
+    color: #EAEAEA;
+    background-image: linear-gradient(to bottom, #1A1A2E, #16213E);
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed; /* or 'absolute' */
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1; /* to keep it below the content */
+  
+    background: linear-gradient(
+      120deg,
+      #1A1A2E,
+      #16213E,
+      #0F3460,
+      #16213E,
+      #1A1A2E
+    );
+    background-size: 200% 200%; /* large size to allow movement */
+  
+    animation: shiftGradient 30s ease infinite; /* adjust time to control speed */
+}
+  
+@keyframes shiftGradient {
+0% {
+    background-position: 0% 50%;
+}
+50% {
+    background-position: 100% 50%;
+}
+100% {
+    background-position: 0% 50%;
+}
+}
+
+h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background-image: linear-gradient(to right, #1DB954, #1B6F22);
+    color: transparent; /* This makes the text color transparent */
+    -webkit-background-clip: text; /* For Safari */
+    background-clip: text; /* Standard property */
+    animation: shine 5s linear infinite;
+    display: inline-block; /* Required for background-clip to work */
+}
+
+@keyframes shine {
+    0% { background-position: right; }
+    100% { background-position: left; }
+}
+
+.logo-fixed {
+    position: fixed; /* Fixed positioning relative to the viewport */
+    right: 50%; /* Center horizontally */
+    top: 30%; /* Center vertically */
+    transform: translate(-50%, -50%); /* Offset the element to center it correctly */
+    z-index: 10; /* Ensure it's above other elements */
+    display: block; /* Make the logo take up space and be part of the layout */
+    opacity: 1;
+    transition: opacity 0.5s linear;
+}
+
+@keyframes enterAndSpin {
+    0% { 
+        right: 100vw; /* Start off the right edge of the viewport */
+        transform: translateX(-50%) translateY(-50%) rotate(0deg); 
+    }
+    100% { 
+        right: calc(50vw - 256px); /* Center based on the element's width */
+        transform: translateX(-50%) translateY(-50%) rotate(360deg); 
+    }
+}
+
+@keyframes spin {
+    0% { 
+        transform: translateX(-50%) translateY(-50%) rotate(0deg); 
+    }
+    100% { 
+        transform: translateX(-50%) translateY(-50%) rotate(360deg); 
+    }
+}
+
+@keyframes exit {
+    0% { 
+        right: calc(50vw - 256px); /* Center based on the element's width */
+        transform: translateX(-50%) translateY(-50%); 
+    }
+    100% { 
+        right: -100vw; /* Move off the left edge of the viewport */
+        transform: translateX(-50%) translateY(-50%); 
+    }
+}
+
+/* Set the specific animations for each state */
+.logo-entering-spinning {
+    animation: enterAndSpin 2s forwards, spin 1s linear infinite 2s;
+}
+
+.logo-spinning {
+    animation: spin 1s linear infinite;
+}
+
+.logo-exiting {
+    animation: exit 1s forwards;
+}
+
+.logo-idle {
+    display: none; /* Ensures the element does not take up any space */
+    opacity: 0;
+}
+
+.spotify-logo {
+    position: absolute;
+    right: -100%; /* Start off-screen */
+    top: 30%; /* Center vertically */
+    z-index: 10; /* Ensure it's above other elements */
+}
+
+.spotify-login-page {
+    text-align: center;
+    padding: 2rem;
+    color: #EAEAEA;
+}
+
+.spotify-login-page h1 {
+    margin-bottom: 1rem; /* Adds more space below the heading */
+    color: #1DB954; /* Spotify's brand color for emphasis */
+}
+
+.spotify-login-page p {
+    font-size: 1.1rem;
+    line-height: 1.6; /* Increases line height for better readability */
+    margin-bottom: 1.5rem; /* Adds more space below the paragraph */
+}
+
+.spotify-login-page p strong {
+    color: #1DB954; /* Adds Spotify's brand color for emphasis */
+    font-weight: bold; /* Makes the text bold */
+}
+
+/* General button styling */
+button,
+.spotify-button,
+.logout-button,
+.guest-button,
+.create-playlist-button,
+.playlist-link,
+input[type="submit"] {
+    display: inline-block;
+    padding: 0.5rem 2rem;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #333; /* Default gray background */
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Hover effect for all buttons */
+button:hover,
+.spotify-button:hover,
+.logout-button:hover,
+.guest-button:hover,
+.create-playlist-button:hover,
+.playlist-link:hover,
+input[type="submit"]:hover {
+    background-color: #1DB954; /* Light up green on hover */
+    color: #fff; /* Ensure text color is white on hover for visibility */
+    transform: scale(1.05);
+    box-shadow: 0 0 10px #1DB954; /* Green shadow */
+}
+
+/* Specific styling for Spotify button to override the default gray */
+.spotify-button {
+    background-color: #1DB954;
+    margin: 1rem auto;
+}
+
+/* Spotify button hover effect */
+.spotify-button:hover {
+    background-color: #17a34a; /* A lighter green for hover state */
+}
+
+/* Create Playlist button specific styling */
+.create-playlist-button {
+    background: linear-gradient(45deg, #1DB954, #189742); /* Spotify green gradient */
+    color: #EAEAEA; /* Light gray text */
+}
+
+/* Playlist link specific styling */
+.playlist-link {
+    color: #EAEAEA; /* Light gray text */
+    text-decoration: none; /* Remove the underline */
+}
+
+/* Adjust the submit button width if necessary */
+input[type="submit"] {
+    width: 33.33%; /* Adjust the width as per your design */
+    margin: auto; /* If you want to center the submit button */
+    display: block; /* Change from inline-block to block if it needs to be on a new line */
+}
+
+/* Ensuring text is vertically centered in buttons and links */
+button,
+.spotify-button,
+.logout-button,
+.guest-button,
+.create-playlist-button,
+.playlist-link,
+input[type="submit"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+}
+
+.create-playlist-button,
+.logout-button {
+    flex: 1; /* This will allow the buttons to share the available space equally */
+}
+
+.button-container {
+    display: flex;
+    justify-content: center; /* This will place items side by side and center them */
+    gap: 1rem; /* Adjust the gap between buttons as needed */
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    width: 50%;
+    max-width: 1200px;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    position: relative;
+}
+
+.logo-wrapper{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.spotify-link:hover, .playlist-link:hover {
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: none;
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px #1DB954;
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: none;
+    }
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    align-items: center;
+    width: 100%;
+}
+
+label {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+input[type="text"] {
+    padding: 0.5rem;
+    border: none;
+    border-radius: 25px;
+    outline: none;
+    font-size: 1rem;
+    width: 100%;
+    background-color: #333;
+    color: #EAEAEA;
+}
+
+/* Results List Styles */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #333;
+}
+
+/* NavBar Styles */
+nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+nav img {
+    max-width: 100%;
+    height: auto;
+    width: 20%;
+    margin-bottom: 1rem; /* Adds space between the logo and the button-container */
+}
+
+.spotify-login-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* This will center the button horizontally */
+    justify-content: center; /* This will help center the content vertically if needed */
+    padding: 2rem;
+    text-align: center;
+}
+
+.spotify-link {
+    display: block;
+    margin: 1rem 0;
+    color: #1DB954;  /* Spotify green for links */
+    text-decoration: none;
+}
+
+.spotify-link:hover {
+    text-decoration: underline;
+}
+
+#resultsList li {
+    display: flex;
+    align-items: center;
+}
+
+#resultsList img {
+    border-radius: 4px;
+    margin-right: 1rem;
+}
+
+input[type="submit"] {
+    padding: 0.5rem 1rem;
+    background: linear-gradient(45deg, #1DB954, #189742);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+    width: 33.33%;
+    line-height: 1.5;  /* New line to adjust the line height */
+    vertical-align: middle;  /* New line to vertically align the text */
+}
+
+.falling-logo {
+    animation: waterfall_spin 3s linear infinite, waterfall_fall 10s linear infinite;
+    will-change: transform; /* Optimizes for animations */
+}
+  
+@keyframes waterfall_spin {
+    from {
+        transform: translateX(-50%) rotate(0deg);
+    }
+    to {
+        transform: translateX(-50%) rotate(360deg);
+    }
+}
+  
+@keyframes waterfall_fall {
+    0%, 100% {
+        top: -50px; /* Start and end off-screen */
+        opacity: 0;
+    }
+    5%, 95% {
+        opacity: 1; /* Fully visible for most of the animation */
+    }
+    50% {
+        top: calc(50vh - 50px); /* Position at the middle of the screen */
+    }
+    100% {
+        top: 100vh; /* End at the bottom of the screen */
+    }
+}
+
+@keyframes waterfall_fallAndSpin {
+    0% {
+      top: -50px; /* Start above the screen */
+      transform: translateX(-50%) rotate(0deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      transform: translateX(-50%) rotate(calc(360deg * (90 / 100)));
+      opacity: 1;
+    }
+    100% {
+      top: 100vh; /* Fall to the bottom of the screen */
+      transform: translateX(-50%) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+/* Responsive Styles for Mobile */
+@media (max-width: 768px) {
+    body {
+        padding: 10% 5%;
+    }
+
+    .button-container {
+        flex-direction: column; /* Stack buttons vertically on mobile */
+        align-items: stretch;
+    }
+
+    .no-wrap{
+        overflow-x: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    nav img {
+        width: 50%; /* Adjust the width of the logo for mobile */
+        max-width: 100%; /* Ensure it doesn't exceed the parent's width */
+        box-sizing: border-box; /* Include padding and borders in the element's width */
+    }
+}
